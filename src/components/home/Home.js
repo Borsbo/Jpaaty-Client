@@ -42,10 +42,10 @@ const Home = () => {
     Nummenkylä: true,
     Hinta: true,
     Hinta2: true,
-    1h: true,
-    2h: true,
-    3h: true,
-    4h: true,
+    "1h": true,
+    "2h": true,
+    "3h": true,
+    "4h": true,
     //4h+: true,
   })
 
@@ -57,6 +57,8 @@ const Home = () => {
   const [filter, setFilter] = useState({
     district: false,
     price: false,
+
+
   })
 
   useEffect(() => {
@@ -116,7 +118,8 @@ const Home = () => {
       </div>
 
       <div>
-        <row>
+        <table>
+        <tr>
           <td>Keskusta</td>
           <Checkbox
             checked={state.Keskusta}
@@ -180,42 +183,47 @@ const Home = () => {
               'aria-label': 'Nummenkylä checkbox',
             }}
           />
-        </row>
+        </tr>
+        </table>
       </div>
             <div>
+              <table>
+              <tr>
               <td>1h</td>
-              <checkbox
-              checked={state.1h}
+              <Checkbox
+              checked={state["1h"]}
               onChange={handleChange('1h')}
               value='1h'
               inputProps={{
                 'arian-label' : '1h',
-              }}>
+              }}/>
               <td>2h</td>
-              <checkbox
-              checked={state.2h}
+              <Checkbox
+              checked={state["2h"]}
               onChange={handleChange('2h')}
               value='2h'
               inputProps={{
                 'arian-label' : '2h',
-              }}>
+              }}/>
               <td>3h</td>
-              <checkbox
-              checked={state.1h}
+              <Checkbox
+              checked={state["3h"]}
               onChange={handleChange('3h')}
               value='3h'
               inputProps={{
                 'arian-label' : '3h',
                 
-              }}>
+              }}/>
               <td>4h</td>
-              <checkbox
-              checked={state.4h}
+              <Checkbox
+              checked={state["4h"]}
               onChange={handleChange('4h')}
               value='4h'
               inputProps={{
                 'arian-label' : '4h',
-              }}>
+              }}/>
+              </tr>
+              </table>
             </div>
       <Table>
         <tbody>
@@ -266,6 +274,7 @@ const Home = () => {
                   }
                 }
               })
+              .filter ((row, r )=> state[row[3]])
               .map((row, r) => (
                 <tr key={r}>
                   {row.map((col, c) => (
