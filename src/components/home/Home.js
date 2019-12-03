@@ -42,6 +42,11 @@ const Home = () => {
     Nummenkylä: true,
     Hinta: true,
     Hinta2: true,
+    1h: true,
+    2h: true,
+    3h: true,
+    4h: true,
+    //4h+: true,
   })
 
   const [tables, setTables] = useState([])
@@ -99,7 +104,6 @@ const Home = () => {
           value={hinta1}
           onChange={({ target }) => {console.log(target.value);setHinta1(target.value)}}
         ></TextField>
-          <input type='text' value={hinta1} onChange={({ target }) => {console.log(target.value);setHinta1(target.value)}}/>
         <p>000 - </p>
         {/* <TextField id='Hinta2' type='Hinta2' inputProps={'Hinta2'}></TextField> */}
         <TextField
@@ -167,7 +171,6 @@ const Home = () => {
               'aria-label': 'Isokytö checkbox',
             }}
           />
-
           <td>Nummenkylä</td>
           <Checkbox
             checked={state.Nummenkylä}
@@ -179,7 +182,41 @@ const Home = () => {
           />
         </row>
       </div>
-
+            <div>
+              <td>1h</td>
+              <checkbox
+              checked={state.1h}
+              onChange={handleChange('1h')}
+              value='1h'
+              inputProps={{
+                'arian-label' : '1h',
+              }}>
+              <td>2h</td>
+              <checkbox
+              checked={state.2h}
+              onChange={handleChange('2h')}
+              value='2h'
+              inputProps={{
+                'arian-label' : '2h',
+              }}>
+              <td>3h</td>
+              <checkbox
+              checked={state.1h}
+              onChange={handleChange('3h')}
+              value='3h'
+              inputProps={{
+                'arian-label' : '3h',
+                
+              }}>
+              <td>4h</td>
+              <checkbox
+              checked={state.4h}
+              onChange={handleChange('4h')}
+              value='4h'
+              inputProps={{
+                'arian-label' : '4h',
+              }}>
+            </div>
       <Table>
         <tbody>
           {table.length > 0 &&
@@ -207,16 +244,16 @@ const Home = () => {
               })
               .filter((row, r) => {
                 const hinta = row[6] 
-                if (hinta1 === 0 || hinta2 === 0) {
+                if (hinta1 === '' || hinta2 === '') {
                   return true
                 } else if (hinta2 === 0) {
-                  if (hinta > hinta1 * 1000) {
+                  if (hinta >= hinta1 * 1000) {
                     return true
                   } else {
                     return false
                   }
-                } else if (hinta1 === 0) {
-                  if (hinta < hinta2 * 1000) {
+                } else if (hinta1 === '') {
+                  if (hinta <= hinta2 * 1000) {
                     return true
                   } else {
                     return false
