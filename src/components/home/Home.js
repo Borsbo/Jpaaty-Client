@@ -42,6 +42,9 @@ const Home = () => {
     Nummenkylä: true,
     Hinta: true,
     Hinta2: true,
+    Rvuosi: true,
+    Rvuosia: true,
+    Rvuosil: true,
     "1h": true,
     "2h": true,
     "3h": true,
@@ -53,6 +56,8 @@ const Home = () => {
   const [table, setTable] = useState([])
   const [hinta1, setHinta1] = useState(0)
   const [hinta2, setHinta2] = useState(0)
+  const [Rvuosia, setRvuosia] = useState([])
+  const [Rvuosil, setRvuosil] = useState([])
 
   const [filter, setFilter] = useState({
     district: false,
@@ -115,6 +120,19 @@ const Home = () => {
           onChange={({ target }) => {console.log(target.value);setHinta2(target.value)}}
         ></TextField>
         <p>000</p>
+      </div>
+      <div>
+      <td>Syötä Rakennusvuosi</td>
+      <div class='row'>
+        <TextField
+        value={Rvuosia}
+        onChange={({ target }) => {console.log(target.value); setRvuosia(target.value)}}
+        ></TextField>
+        <TextField
+        value={Rvuosil}
+        onChange={({ target }) => {console.log(target.value); setRvuosil(target.value)}}
+        ></TextField>
+        </div>
       </div>
 
       <div>
@@ -247,8 +265,6 @@ const Home = () => {
                     return true
                   }
                 }
-
-                return false
               })
               .filter((row, r) => {
                 const hinta = row[6] 
@@ -274,6 +290,20 @@ const Home = () => {
                   }
                 }
               })
+              .filter((row, r) => {
+                const Rvuosi = row[9]
+                if (
+                  Rvuosia === ''||
+                  Rvuosil === '' ||
+                  Rvuosi >= Rvuosia ||
+                  Rvuosi <= Rvuosil ||
+                  (Rvuosi >= Rvuosia && Rvuosi <= Rvuosil)
+                ) {
+                  return true
+                } else { 
+                  return false
+              }
+            })
               .filter ((row, r )=> state[row[3]])
               .map((row, r) => (
                 <tr key={r}>
